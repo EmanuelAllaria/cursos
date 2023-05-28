@@ -1,0 +1,13 @@
+footer.footer {
+    height: 50px;
+    line-height: 50px;
+    background: #9747FF;
+    color: #fff;
+    border-top: 1px solid #000;
+}
+footer a {
+    color: #fff;
+}
+footer .container {
+    --bs-gutter-x: 0;
+}

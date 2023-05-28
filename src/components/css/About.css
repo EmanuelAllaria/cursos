@@ -1,0 +1,26 @@
+img.profile-picture {
+    width: 100%;
+}
+section#about {
+    padding: 20px;
+}
+.about-content p {
+    color: #9747FF;
+}
+@media screen and (max-width: 991px) {
+    .col-lg-5 {
+        height: fit-content !important;
+        border-radius: 0 !important;
+    }
+    p.copy {
+        font-size: 10px;
+        text-align: start;
+    }
+    .container-banner img {
+        height: inherit;
+    }
+    img.profile-picture, img.course-image {
+        height: inherit !important;
+        border-radius: 0 !important;
+    }
+}

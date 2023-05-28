@@ -1,0 +1,28 @@
+@media screen and (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        justify-content: flex-end;
+    }
+}
+@media screen and (max-width: 991px) {
+    p.copy {
+        font-size: 13px;
+    }
+    header {
+        position: sticky !important;
+        top: 0;
+    }
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    z-index: 9999;
+}
+.bg-body-tertiary {
+    /* background-color: transparent !important; */
+    background-color: #9747FF !important;
+}
+.bg-body-tertiary a {
+    color: #fff;
+}
