@@ -76,3 +76,10 @@
 .about-section .row {
     flex-direction: row-reverse;
 }
+
+@media screen and (max-width: 991px) {
+    .section-image-container {
+        height: inherit;
+        margin-bottom: 20px;
+    }
+}
