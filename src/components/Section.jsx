@@ -19,7 +19,7 @@ const Section = ({ type, img }) => {
           </Col>
           <Col lg={6} md={12} className={`${isCourseSection ? 'order-lg-1' : ''}`}>
             <div className="section-content">
-              <h2 className="section-title">{isAboutSection ? 'Sobre Nosotros' : 'Nuestro Curso'}</h2>
+              <h2 className="section-title">{isAboutSection ? 'About' : 'Course'}</h2>
               <p className="section-description">
                 {isAboutSection ? 'Descripción del about' : 'Descripción del curso'}
               </p>
