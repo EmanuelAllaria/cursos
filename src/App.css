@@ -42,3 +42,16 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 425px) {
+  iframe.Video-About {
+    width: 90%;
+    height: 200px;
+  }
+}
+@media screen and (max-width: 768px) {
+  iframe.Video-About {
+    width: 90%;
+    height: 400px;
+  }
+}

@@ -1,0 +1,30 @@
+.container-img img {
+    width: 70%;
+    height: 500px;
+}
+button.course-page.btn.btn-primary {
+    width: inherit;
+}
+.container-btn-alert {
+    text-align: -webkit-center;
+}
+.alert-success {
+    width: 50%;
+    margin-top: 20px;
+}
+/* .container-calendary {
+    width: 50%;
+}
+
+section#about {
+    width: 50%;
+}
+#about, .container-calendary {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 20px;
+    width: 35%;
+} */

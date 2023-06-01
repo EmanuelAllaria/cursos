@@ -26,3 +26,6 @@ header {
 .bg-body-tertiary a {
     color: #fff;
 }
+header.Course {
+    position: initial;
+}

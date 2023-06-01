@@ -1,19 +1,21 @@
 import './App.css';
-import Header from './components/Header';
-import Banner from './components/Banner';
-import Section from './components/Section';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+import Home from './Home';
+import Curso from './Curso';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Banner/>
-      <Section type={"about"} img={"https://fondosmil.com/fondo/38780.jpg"}/>
-      <Section type={"course"} img={"https://www.xtrafondos.com/descargar.php?id=5771&resolucion=1280x720"}/>
-      <Contact/>
-      <Footer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} exact />
+          <Route path="/curso" element={<Curso />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
 import "./css/Header.css";
-// import Logo from '../logo.png'
+// import Logo from '../logo.png';
 
-function Header() {
+function Header( { page } ) {
+    const isPageHome = page === 'home';
+    const isPageCourse = page === 'course';
+
   return (
-    <header>
+    <header className={`${isPageHome ? 'Home' : ''} ${isPageCourse ? 'Course' : ''}`}>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
@@ -20,10 +23,10 @@ function Header() {
                             <a className="nav-link" aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/#about-section">About</a>
+                            <a className="nav-link" href="/#about%20">About</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/#course-section">Course</a>
+                            <a className="nav-link" href="/#%20course">Course</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/#contact">Contact</a>

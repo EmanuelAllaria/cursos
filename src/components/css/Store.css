@@ -1,0 +1,9 @@
+#calendar {
+    padding: 50px;
+}
+.paypal-buttons {
+    width: 50% !important;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
