@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Hook personalizado para animaciones de scroll usando Intersection Observer
@@ -9,46 +9,46 @@ import { useEffect, useRef, useState } from 'react';
  * @returns {Array} [ref, isVisible] - Referencia del elemento y estado de visibilidad
  */
 export const useScrollAnimation = (options = {}) => {
-    const {
-        threshold = 0.1,
-        rootMargin = '0px 0px -50px 0px',
-        triggerOnce = true
-    } = options;
+  const {
+    threshold = 0.1,
+    rootMargin = "0px 0px -50px 0px",
+    triggerOnce = true,
+  } = options;
 
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
 
-    useEffect(() => {
-        const element = ref.current;
-        if (!element) return;
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    if (triggerOnce) {
-                        observer.unobserve(element);
-                    }
-                } else if (!triggerOnce) {
-                    setIsVisible(false);
-                }
-            },
-            {
-                threshold,
-                rootMargin
-            }
-        );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce) {
+            observer.unobserve(element);
+          }
+        } else if (!triggerOnce) {
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold,
+        rootMargin,
+      }
+    );
 
-        observer.observe(element);
+    observer.observe(element);
 
-        return () => {
-            if (element) {
-                observer.unobserve(element);
-            }
-        };
-    }, [threshold, rootMargin, triggerOnce]);
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [threshold, rootMargin, triggerOnce]);
 
-    return [ref, isVisible];
+  return [ref, isVisible];
 };
 
 /**
@@ -58,44 +58,44 @@ export const useScrollAnimation = (options = {}) => {
  * @returns {Array} [refs, visibleItems] - Referencias y elementos visibles
  */
 export const useStaggeredAnimation = (itemCount, delay = 100) => {
-    const [visibleItems, setVisibleItems] = useState(new Set());
-    const refs = useRef([]);
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const refs = useRef([]);
 
-    useEffect(() => {
-        const observers = [];
+  useEffect(() => {
+    const observers = [];
 
-        refs.current.forEach((ref, index) => {
-            if (!ref) return;
+    refs.current.forEach((ref, index) => {
+      if (!ref) return;
 
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            setVisibleItems(prev => new Set([...prev, index]));
-                        }, index * delay);
-                        observer.unobserve(ref);
-                    }
-                },
-                {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                }
-            );
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setVisibleItems((prev) => new Set([...prev, index]));
+            }, index * delay);
+            observer.unobserve(ref);
+          }
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        }
+      );
 
-            observer.observe(ref);
-            observers.push(observer);
-        });
+      observer.observe(ref);
+      observers.push(observer);
+    });
 
-        return () => {
-            observers.forEach(observer => observer.disconnect());
-        };
-    }, [itemCount, delay]);
-
-    const setRef = (index) => (element) => {
-        refs.current[index] = element;
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
     };
+  }, [itemCount, delay]);
 
-    return [setRef, visibleItems];
+  const setRef = (index) => (element) => {
+    refs.current[index] = element;
+  };
+
+  return [setRef, visibleItems];
 };
 
 /**
@@ -103,37 +103,37 @@ export const useStaggeredAnimation = (itemCount, delay = 100) => {
  * @returns {Object} Estado del scroll
  */
 export const useScrollEffects = () => {
-    const [scrollY, setScrollY] = useState(0);
-    const [scrollDirection, setScrollDirection] = useState('up');
-    const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("up");
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    useEffect(() => {
-        let lastScrollY = window.scrollY;
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
 
-        const updateScrollState = () => {
-            const currentScrollY = window.scrollY;
-            
-            setScrollY(currentScrollY);
-            setIsScrolled(currentScrollY > 50);
-            setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up');
-            
-            lastScrollY = currentScrollY;
-        };
+    const updateScrollState = () => {
+      const currentScrollY = window.scrollY;
 
-        const throttledUpdateScrollState = throttle(updateScrollState, 10);
+      setScrollY(currentScrollY);
+      setIsScrolled(currentScrollY > 50);
+      setScrollDirection(currentScrollY > lastScrollY ? "down" : "up");
 
-        window.addEventListener('scroll', throttledUpdateScrollState);
-
-        return () => {
-            window.removeEventListener('scroll', throttledUpdateScrollState);
-        };
-    }, []);
-
-    return {
-        scrollY,
-        scrollDirection,
-        isScrolled
+      lastScrollY = currentScrollY;
     };
+
+    const throttledUpdateScrollState = throttle(updateScrollState, 10);
+
+    window.addEventListener("scroll", throttledUpdateScrollState);
+
+    return () => {
+      window.removeEventListener("scroll", throttledUpdateScrollState);
+    };
+  }, []);
+
+  return {
+    scrollY,
+    scrollDirection,
+    isScrolled,
+  };
 };
 
 /**
@@ -141,60 +141,60 @@ export const useScrollEffects = () => {
  * @param {number} delay - Delay inicial
  */
 export const usePageAnimation = (delay = 100) => {
-    const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoaded(true);
-        }, delay);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, delay);
 
-        return () => clearTimeout(timer);
-    }, [delay]);
+    return () => clearTimeout(timer);
+  }, [delay]);
 
-    return isLoaded;
+  return isLoaded;
 };
 
 /**
  * Función de throttle para optimizar el rendimiento
  */
 function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
 }
 
 /**
  * Componente wrapper para animaciones de scroll
  */
-export const ScrollAnimationWrapper = ({ 
-    children, 
-    animation = 'fade-in-on-scroll',
-    delay = 0,
-    className = '',
-    ...props 
+export const ScrollAnimationWrapper = ({
+  children,
+  animation = "fade-in-on-scroll",
+  delay = 0,
+  className = "",
+  ...props
 }) => {
-    const [ref, isVisible] = useScrollAnimation();
+  const [ref, isVisible] = useScrollAnimation();
 
-    return (
-        <div
-            ref={ref}
-            className={`${animation} ${isVisible ? 'visible' : ''} ${className}`}
-            style={{ 
-                animationDelay: `${delay}ms`,
-                ...props.style 
-            }}
-            {...props}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      ref={ref}
+      className={`${animation} ${isVisible ? "visible" : ""} ${className}`}
+      style={{
+        animationDelay: `${delay}ms`,
+        ...props.style,
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default useScrollAnimation;

@@ -1,18 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import coursesData from '../../data/courses';
-import CourseFilters from './CourseFilters';
-import CourseCard from './CourseCard';
-import '../css/Courses.css';
+import React, { useEffect, useMemo, useState } from "react";
+import coursesData from "../../data/courses";
+import CourseFilters from "./CourseFilters";
+import CourseCard from "./CourseCard";
+import "../css/Courses.css";
 
-const FAVORITES_KEY = 'favoriteCourses';
+const FAVORITES_KEY = "favoriteCourses";
 
 function CourseCatalog() {
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('');
-  const [level, setLevel] = useState('');
-  const [language, setLanguage] = useState('');
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [level, setLevel] = useState("");
+  const [language, setLanguage] = useState("");
   const [onlyFavs, setOnlyFavs] = useState(false);
-  const [sortBy, setSortBy] = useState('relevance');
+  const [sortBy, setSortBy] = useState("relevance");
   const [favorites, setFavorites] = useState(() => {
     try {
       const raw = localStorage.getItem(FAVORITES_KEY);
@@ -39,7 +39,9 @@ function CourseCatalog() {
 
   const toggleFavorite = (courseId) => {
     setFavorites((prev) =>
-      prev.includes(courseId) ? prev.filter((id) => id !== courseId) : [...prev, courseId]
+      prev.includes(courseId)
+        ? prev.filter((id) => id !== courseId)
+        : [...prev, courseId]
     );
   };
 
@@ -48,10 +50,11 @@ function CourseCatalog() {
 
     if (query.trim()) {
       const q = query.toLowerCase();
-      list = list.filter((c) =>
-        c.title.toLowerCase().includes(q) ||
-        c.category.toLowerCase().includes(q) ||
-        (c.tag || '').toLowerCase().includes(q)
+      list = list.filter(
+        (c) =>
+          c.title.toLowerCase().includes(q) ||
+          c.category.toLowerCase().includes(q) ||
+          (c.tag || "").toLowerCase().includes(q)
       );
     }
 
@@ -61,16 +64,16 @@ function CourseCatalog() {
     if (onlyFavs) list = list.filter((c) => favorites.includes(c.id));
 
     switch (sortBy) {
-      case 'rating_desc':
+      case "rating_desc":
         list.sort((a, b) => b.rating - a.rating);
         break;
-      case 'price_asc':
+      case "price_asc":
         list.sort((a, b) => a.price - b.price);
         break;
-      case 'price_desc':
+      case "price_desc":
         list.sort((a, b) => b.price - a.price);
         break;
-      case 'title_asc':
+      case "title_asc":
         list.sort((a, b) => a.title.localeCompare(b.title));
         break;
       default:
@@ -94,21 +97,45 @@ function CourseCatalog() {
       />
 
       <div className="catalog-meta">
-        <span className="results-count">{filteredCourses.length} resultados</span>
+        <span className="results-count">
+          {filteredCourses.length} resultados
+        </span>
         {onlyFavs && <span className="fav-indicator">Viendo favoritos</span>}
       </div>
 
       {filteredCourses.length === 0 ? (
         <div className="empty-state card fade-in">
           <div className="empty-icon" aria-hidden>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
           </div>
           <h3 className="empty-title">Sin resultados</h3>
-          <p className="empty-desc">No encontramos cursos que coincidan. Intenta limpiar o cambiar los filtros.</p>
-          <button className="btn btn-secondary" onClick={() => onFiltersChange({ query: '', category: '', level: '', language: '', onlyFavs: false, sortBy: 'relevance' })}>
+          <p className="empty-desc">
+            No encontramos cursos que coincidan. Intenta limpiar o cambiar los
+            filtros.
+          </p>
+          <button
+            className="btn btn-secondary"
+            onClick={() =>
+              onFiltersChange({
+                query: "",
+                category: "",
+                level: "",
+                language: "",
+                onlyFavs: false,
+                sortBy: "relevance",
+              })
+            }
+          >
             Limpiar filtros
           </button>
         </div>
