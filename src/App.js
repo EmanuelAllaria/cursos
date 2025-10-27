@@ -10,7 +10,7 @@ import Curso from './Curso';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/cursos">
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/curso" element={<Curso />} />
