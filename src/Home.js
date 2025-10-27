@@ -13,7 +13,16 @@ function Home() {
         <Header page="home"/>
         <Banner/>
         <Section type={"about"} img={ImgAbout}/>
-        <iframe className='Video-About' width="560" height="315" src="https://www.youtube-nocookie.com/embed/RAFpHtv9isA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe
+          className='Video-About'
+          width="560"
+          height="315"
+          src="https://www.youtube-nocookie.com/embed/RAFpHtv9isA"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
         <Section type={"course"} img={ImgCourse}/>
         <Contact/>
         <Footer/>

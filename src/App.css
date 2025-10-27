@@ -1,53 +1,159 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .App {
-  text-align: center;
+  min-height: 100vh;
+  background-color: var(--gray-50);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Contenedor principal para las páginas */
+.page-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.main-content {
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
+/* Estilos para el video de About */
+.Video-About {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  margin: var(--spacing-2xl) auto;
+  display: block;
+  border: none;
+}
+
+/* Contenedor del curso */
+.containerCourse {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(30px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media screen and (max-width: 425px) {
-  iframe.Video-About {
-    width: 90%;
-    height: 200px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Estilos para cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--gray-200);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-subtitle {
+  color: var(--gray-600);
+  font-size: 0.875rem;
+}
+
+/* Grid responsive */
+.grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .Video-About {
+    width: 95%;
+    height: 250px;
+    margin: var(--spacing-xl) auto;
+  }
+  
+  .containerCourse {
+    padding: var(--spacing-lg) var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+  
+  .grid-cols-2,
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Loading states */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--gray-300);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Estados de hover para elementos interactivos */
+.interactive {
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.interactive:hover {
+  transform: scale(1.02);
 }
 @media screen and (max-width: 768px) {
   iframe.Video-About {
